@@ -33,10 +33,10 @@ def main():
         print("11. Delete Student")
         print("12. Exit")
 
-        choice = input("Enter your choice: ")
+        choice = input("Enter your choice: ").strip()
 
         if choice == "1":
-            student_ops.Registred_student()
+            student_ops.registered_student()
         elif choice == "2":
             order_ops.create_order()
         elif choice == "3":
@@ -62,4 +62,6 @@ def main():
             break
         else:
             print("Invalid choice. Please try again.")
+
+
 main()

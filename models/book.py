@@ -3,9 +3,8 @@ from Database.Config import db
 
 class Book(Model):
     id = IntegerField(primary_key=True)
-    title = CharField()
-    author = CharField()
+    title = CharField(null=False)
+    author = CharField(null=False)
 
     class Meta:
         database = db
-
