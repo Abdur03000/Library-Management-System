@@ -11,8 +11,8 @@ def initialize():
     db.create_tables([Student, Book, Order], safe=True)
     db.close()
 
-def main():
-    initialize()
+# def main():
+#     initialize()
 
     student_ops = StudentOperations()
     book_ops = BookOperations()
@@ -64,4 +64,4 @@ def main():
             print("Invalid choice. Please try again.")
 
 
-main()
+initialize()
