@@ -6,19 +6,19 @@ from models.student import Student
 from models.book import Book
 from models.order import Order
 
-def initialize():
-    db.connect()
-    db.create_tables([Student, Book, Order], safe=True)
-    db.close()
+class LibrarySystem:
+    def __init__(self):
+        self.initialize()
+        self.student_ops = StudentOperations()
+        self.book_ops = BookOperations()
+        self.order_ops = OrderOperations()
 
-# def main():
-#     initialize()
+    def initialize(self):
+        db.connect()
+        db.create_tables([Student, Book, Order], safe=True)
+        db.close()
 
-    student_ops = StudentOperations()
-    book_ops = BookOperations()
-    order_ops = OrderOperations()
-
-    while True:
+    def display_menu(self):
         print("= Library Management System =")
         print("1. Create Student")
         print("2. Create Order")
@@ -33,35 +33,43 @@ def initialize():
         print("11. Delete Student")
         print("12. Exit")
 
-        choice = input("Enter your choice: ").strip()
-
+    def process_choice(self, choice):
         if choice == "1":
-            student_ops.registered_student()
+            self.student_ops.registered_student()
         elif choice == "2":
-            order_ops.create_order()
+            self.order_ops.create_order()
         elif choice == "3":
-            book_ops.add_book()
+            self.book_ops.add_book()
         elif choice == "4":
-            order_ops.return_book()
+            self.order_ops.return_book()
         elif choice == "5":
-            student_ops.display_students()
+            self.student_ops.display_students()
         elif choice == "6":
-            book_ops.display_books()
+            self.book_ops.display_books()
         elif choice == "7":
-            order_ops.display_orders()
+            self.order_ops.display_orders()
         elif choice == "8":
-            student_ops.edit_student()
+            self.student_ops.edit_student()
         elif choice == "9":
-            book_ops.edit_book()
+            self.book_ops.edit_book()
         elif choice == "10":
-            book_ops.delete_book()
+            self.book_ops.delete_book()
         elif choice == "11":
-            student_ops.delete_student()
+            self.student_ops.delete_student()
         elif choice == "12":
             print("Closing the Library System! Goodbye")
-            break
+            return True
         else:
             print("Invalid choice. Please try again.")
+        return True
+
+    def run(self):
+        while True:
+            self.display_menu()
+            choice = input("Enter your choice: ")
+            if not self.process_choice(choice):
+                break
 
 
-initialize()
+library_system = LibrarySystem()
+library_system.run()
